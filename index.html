@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Loja virtual</title>
+    <style>
+        #produtos {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: flex;
+        }
+
+        #carrinho {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 2%;
+            display: block;
+        }
+
+        .produto-single{
+            width: 33.3%;
+            padding: 0 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Vitrine:</h2>
+    <div id="produtos">
+
+    </div>
+
+    <h2>Produto:</h2>
+    <div id="carrinho">
+
+    </div>
+    <script>
+        const items = [
+            {
+                id: 0,
+                nome: "camiseta",
+                img: "img/camiseta.jpg",
+                qtd: 0
+            },
+            {
+                id: 1,
+                nome: "short",
+                img: "img/camiseta.jpg",
+                qtd: 0
+            },
+            {
+                id: 2,
+                nome: "sapato",
+                img: "img/camiseta.jpg",
+                qtd: 0
+            }
+        ];
+
+        inicializarLoja = () => {
+            var containerProdutos = document.querySelector('#produtos');
+            items.map((val)=>{
+                containerProdutos.innerHTML += `
+
+                <div class="produto-single">
+                    <img src="${val.img}" style="width:40px;height:40px;"/> 
+                    <p>${val.nome}</p>
+                    <a key="${val.id}" href="#" onClick="teste(${val.id})">Adicionar ao carrinho</a> 
+                </div>
+                `
+            });
+            /*for(const val of items)
+            {
+                console.log("foreach:" + val.nome);
+            }*/
+        }
+
+        inicializarLoja();
+
+        atualizarCarrinho = () => {
+            var containerProdutos = document.querySelector('#carrinho');
+            containerProdutos.innerHTML = "";
+            items.map((val)=>{
+                if(val.qtd > 0) {
+                    containerProdutos.innerHTML += `
+                    <p> [${val.nome} → Qtd: ${val.qtd}] </p>
+                    `
+                }
+            });
+        }
+
+        teste = (key) => {
+            items[key].qtd++;
+            atualizarCarrinho();
+        }
+/*        var links = document.getElementsByTagName('a');
+
+        for(var i = 0; i < links.length; i++) {
+            links[i].addEventListener("click", function(){
+                let key = this.getAttribute('key');
+                items[key].qtd++;
+                atualizarCarrinho();
+                return false;
+            });
+        } */
+    </script>
+</body>
+</html>
